@@ -1,0 +1,11 @@
+type Record {
+	id: ID! @id
+	name: String!
+  range: Range
+}
+
+type Range {
+  id: ID! @id
+  start: String!
+  end: String!
+}

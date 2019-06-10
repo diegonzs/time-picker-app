@@ -1,0 +1,37 @@
+{
+  "name": "create-react-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.19.3",
+    "apollo-boost": "^0.4.2",
+    "graphql": "^14.3.1",
+    "graphql-tag": "^2.10.1",
+    "moment": "^2.24.0",
+    "react": "^16.6.1",
+    "react-apollo": "^2.5.6",
+    "react-dom": "^16.6.1",
+    "react-scripts": "2.1.1",
+    "uniforms": "^2.0.0-alpha.1",
+    "uniforms-antd": "^2.0.0-alpha.1",
+    "uniforms-bridge-graphql": "^2.0.0-alpha.1",
+    "uniforms-bridge-simple-schema": "^2.0.0-alpha.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "now-dev": "react-scripts start",
+    "now-build": "react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

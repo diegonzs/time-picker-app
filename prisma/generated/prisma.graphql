@@ -1,0 +1,309 @@
+type AggregateRange {
+  count: Int!
+}
+
+type AggregateRecord {
+  count: Int!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+scalar Long
+
+type Mutation {
+  createRange(data: RangeCreateInput!): Range!
+  updateRange(data: RangeUpdateInput!, where: RangeWhereUniqueInput!): Range
+  updateManyRanges(data: RangeUpdateManyMutationInput!, where: RangeWhereInput): BatchPayload!
+  upsertRange(where: RangeWhereUniqueInput!, create: RangeCreateInput!, update: RangeUpdateInput!): Range!
+  deleteRange(where: RangeWhereUniqueInput!): Range
+  deleteManyRanges(where: RangeWhereInput): BatchPayload!
+  createRecord(data: RecordCreateInput!): Record!
+  updateRecord(data: RecordUpdateInput!, where: RecordWhereUniqueInput!): Record
+  updateManyRecords(data: RecordUpdateManyMutationInput!, where: RecordWhereInput): BatchPayload!
+  upsertRecord(where: RecordWhereUniqueInput!, create: RecordCreateInput!, update: RecordUpdateInput!): Record!
+  deleteRecord(where: RecordWhereUniqueInput!): Record
+  deleteManyRecords(where: RecordWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  range(where: RangeWhereUniqueInput!): Range
+  ranges(where: RangeWhereInput, orderBy: RangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Range]!
+  rangesConnection(where: RangeWhereInput, orderBy: RangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RangeConnection!
+  record(where: RecordWhereUniqueInput!): Record
+  records(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Record]!
+  recordsConnection(where: RecordWhereInput, orderBy: RecordOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecordConnection!
+  node(id: ID!): Node
+}
+
+type Range {
+  id: ID!
+  start: String!
+  end: String!
+}
+
+type RangeConnection {
+  pageInfo: PageInfo!
+  edges: [RangeEdge]!
+  aggregate: AggregateRange!
+}
+
+input RangeCreateInput {
+  start: String!
+  end: String!
+}
+
+input RangeCreateOneInput {
+  create: RangeCreateInput
+  connect: RangeWhereUniqueInput
+}
+
+type RangeEdge {
+  node: Range!
+  cursor: String!
+}
+
+enum RangeOrderByInput {
+  id_ASC
+  id_DESC
+  start_ASC
+  start_DESC
+  end_ASC
+  end_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type RangePreviousValues {
+  id: ID!
+  start: String!
+  end: String!
+}
+
+type RangeSubscriptionPayload {
+  mutation: MutationType!
+  node: Range
+  updatedFields: [String!]
+  previousValues: RangePreviousValues
+}
+
+input RangeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: RangeWhereInput
+  AND: [RangeSubscriptionWhereInput!]
+  OR: [RangeSubscriptionWhereInput!]
+  NOT: [RangeSubscriptionWhereInput!]
+}
+
+input RangeUpdateDataInput {
+  start: String
+  end: String
+}
+
+input RangeUpdateInput {
+  start: String
+  end: String
+}
+
+input RangeUpdateManyMutationInput {
+  start: String
+  end: String
+}
+
+input RangeUpdateOneInput {
+  create: RangeCreateInput
+  update: RangeUpdateDataInput
+  upsert: RangeUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: RangeWhereUniqueInput
+}
+
+input RangeUpsertNestedInput {
+  update: RangeUpdateDataInput!
+  create: RangeCreateInput!
+}
+
+input RangeWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  start: String
+  start_not: String
+  start_in: [String!]
+  start_not_in: [String!]
+  start_lt: String
+  start_lte: String
+  start_gt: String
+  start_gte: String
+  start_contains: String
+  start_not_contains: String
+  start_starts_with: String
+  start_not_starts_with: String
+  start_ends_with: String
+  start_not_ends_with: String
+  end: String
+  end_not: String
+  end_in: [String!]
+  end_not_in: [String!]
+  end_lt: String
+  end_lte: String
+  end_gt: String
+  end_gte: String
+  end_contains: String
+  end_not_contains: String
+  end_starts_with: String
+  end_not_starts_with: String
+  end_ends_with: String
+  end_not_ends_with: String
+  AND: [RangeWhereInput!]
+  OR: [RangeWhereInput!]
+  NOT: [RangeWhereInput!]
+}
+
+input RangeWhereUniqueInput {
+  id: ID
+}
+
+type Record {
+  id: ID!
+  name: String!
+  range: Range
+}
+
+type RecordConnection {
+  pageInfo: PageInfo!
+  edges: [RecordEdge]!
+  aggregate: AggregateRecord!
+}
+
+input RecordCreateInput {
+  name: String!
+  range: RangeCreateOneInput
+}
+
+type RecordEdge {
+  node: Record!
+  cursor: String!
+}
+
+enum RecordOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type RecordPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type RecordSubscriptionPayload {
+  mutation: MutationType!
+  node: Record
+  updatedFields: [String!]
+  previousValues: RecordPreviousValues
+}
+
+input RecordSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: RecordWhereInput
+  AND: [RecordSubscriptionWhereInput!]
+  OR: [RecordSubscriptionWhereInput!]
+  NOT: [RecordSubscriptionWhereInput!]
+}
+
+input RecordUpdateInput {
+  name: String
+  range: RangeUpdateOneInput
+}
+
+input RecordUpdateManyMutationInput {
+  name: String
+}
+
+input RecordWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  range: RangeWhereInput
+  AND: [RecordWhereInput!]
+  OR: [RecordWhereInput!]
+  NOT: [RecordWhereInput!]
+}
+
+input RecordWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  range(where: RangeSubscriptionWhereInput): RangeSubscriptionPayload
+  record(where: RecordSubscriptionWhereInput): RecordSubscriptionPayload
+}
